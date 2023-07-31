@@ -51,7 +51,11 @@ export default function Navbar({ user }) {
           <li>
             <a href="#">Pro</a>
           </li>
-          {userDetails ? (
+          {!userDetails ? (
+            <li>
+              <Link href={"/auth"}>Login</Link>
+            </li>
+          ) : (
             <div className={styles.avatar__dropdown}>
               <div className={styles.avatar}>
                 {creatingAvatar(userDetails?.email)}
@@ -61,10 +65,6 @@ export default function Navbar({ user }) {
                 <li onClick={signOut}>Logout</li>
               </div>
             </div>
-          ) : (
-            <li>
-              <Link href={"/auth"}>Login</Link>
-            </li>
           )}
         </ul>
       </div>

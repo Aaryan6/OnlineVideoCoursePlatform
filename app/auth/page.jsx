@@ -16,28 +16,34 @@ export default function AuthForm() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    await supabase.auth.signUp({
+    const res = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: `${location.origin}/auth/callback`,
       },
     });
+    if (res.error) {
+      return alert(res.error.message);
+    }
     setView("check-email");
   };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    await supabase.auth.signInWithPassword({
+    const res = await supabase.auth.signInWithPassword({
       email,
       password,
     });
+    if (res.error) {
+      return alert(res.error.message);
+    }
     router.push("/");
     router.refresh();
   };
 
   const { userDetails } = useGlobalContext();
-  if (userDetails) {
+  if (userDetails?.email) {
     router.push("/");
   }
 
