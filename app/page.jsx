@@ -1,16 +1,12 @@
-import Hero from "@/components/HeroSection/Hero";
-import styles from "./page.module.scss";
-import Navbar from "@/components/Navbar/Navbar";
-import FeaturedCourses from "@/components/FeaturedCourses/FeaturedCourses";
-import Footer from "@/components/Footer/Footer";
-
-export default function Home() {
+import Hero from "@/components/Hero";
+import styles from "@/styles/home.module.scss";
+import FeaturedCourses from "@/components/FeaturedCourses";
+import Footer from "@/components/Footer";
+export default async function Home() {
   return (
     <main className={styles.main}>
-      <Navbar />
       <Hero />
       <FeaturedCourses />
-
       {/* about */}
       <div className={styles.about}>
         <h1>
@@ -20,6 +16,7 @@ export default function Home() {
           We focus on real-world scenarios, cutting edge technologies, and
           problem solving.
         </h3>
+        <button>Explore Now</button>
       </div>
       {/* ------ */}
 

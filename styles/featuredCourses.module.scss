@@ -1,0 +1,59 @@
+.container {
+  background: #f7faf8;
+  padding: 4rem 0;
+
+  &__wrapper {
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .courses {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 4rem 0 0;
+    gap: 1%;
+    justify-items: center;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .container {
+    .courses {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .container {
+    .courses {
+      grid-template-columns: repeat(1, 1fr);
+      row-gap: 2rem;
+    }
+  }
+}
+
+.back__button {
+  position: absolute;
+  top: 6rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 20px;
+
+  button {
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
+    cursor: pointer;
+  }
+}

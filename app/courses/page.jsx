@@ -1,19 +1,31 @@
-import Footer from "@/components/Footer/Footer";
-import Navbar from "@/components/Navbar/Navbar";
-import Image from "next/image";
-import styles from "./page.module.scss";
+"use client";
+import Footer from "@/components/Footer";
+import styles from "@/styles/featuredCourses.module.scss";
 import { CoursesDetails } from "@/courseData";
+import Card from "@/components/Card";
+import { BsArrowLeft } from "react-icons/bs";
+import Link from "next/link";
+import { useGlobalContext } from "@/utils/useContext";
 
 export default function Courses() {
+  const { userDetails, search } = useGlobalContext();
+  let user = userDetails;
   return (
     <main className={styles.main}>
-      <Navbar />
+      <Link href={"/"}>
+        <div className={styles.back__button}>
+          <BsArrowLeft />
+          <button>Back</button>
+        </div>
+      </Link>
 
       {/* {courses details} */}
       <div className={styles.container}>
         <h1>Courses</h1>
         <div className={styles.courses}>
-          {CoursesDetails.map((course) => {
+          {CoursesDetails.filter((c) =>
+            c.course_name.toLowerCase().includes(search.toLowerCase())
+          ).map((course) => {
             return (
               <Card
                 key={course.id}
@@ -21,6 +33,7 @@ export default function Courses() {
                 desc={course.description}
                 image={course.image_link}
                 type={course.course_type}
+                user={user}
               />
             );
           })}
@@ -31,21 +44,3 @@ export default function Courses() {
     </main>
   );
 }
-
-const Card = ({ name, desc, image, type }) => {
-  return (
-    <div className={styles.card}>
-      <Image src={image} alt={name} width={300} height={300} />
-      <div className={styles.card__info}>
-        <div className={styles.card__content}>
-          <div className={styles.title}>
-            <h3>{name}</h3>
-            <span>{type}</span>
-          </div>
-          <p>{desc}</p>
-        </div>
-        <button>Get Started</button>
-      </div>
-    </div>
-  );
-};
