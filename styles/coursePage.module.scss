@@ -64,3 +64,9 @@
     cursor: pointer;
   }
 }
+
+@media only screen and (max-width: 590px) {
+  .back__button {
+    top: 9rem;
+  }
+}
