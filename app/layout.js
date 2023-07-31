@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 import { GlobalContextProvider } from "@/utils/useContext";
 import Navbar from "@/components/Navbar";
 
+export const revalidate = 0;
+
 const sans = Rubik({
   subsets: ["latin"],
   weight: ["variable"],
