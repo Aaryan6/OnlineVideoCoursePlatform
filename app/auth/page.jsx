@@ -16,6 +16,8 @@ export default function AuthForm() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+    if (password.length < 6)
+      return alert("Password must be at least 6 characters long");
     const res = await supabase.auth.signUp({
       email,
       password,
@@ -84,7 +86,7 @@ export default function AuthForm() {
             name="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-            placeholder="••••••••"
+            placeholder="•••••••• ( min 6 characters )"
           />
           {view === "sign-in" ? (
             <>
