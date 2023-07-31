@@ -9,10 +9,9 @@ const Card = ({ name, desc, image, type, user }) => {
 
   const handleOnClick = () => {
     if (!user?.email && type === "Premium") {
-      alert("Please login to continue, " + user?.email);
+      router.push("/auth");
       return;
     }
-    console.log("clicked");
     router.push("/courses/" + name.toLowerCase().replace(/\s+/g, "-"));
   };
 

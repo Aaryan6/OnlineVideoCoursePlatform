@@ -6,7 +6,7 @@ export const GlobalContext = createContext();
 
 // Create the UserProvider component to wrap the app and provide the context value
 export function GlobalContextProvider({ children }) {
-  const [userDetails, setUserDetails] = useState({ name: "john" });
+  const [userDetails, setUserDetails] = useState({});
   const [search, setSearch] = useState("");
 
   function login(userData) {

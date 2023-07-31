@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import styles from "@/styles/home.module.scss";
 import FeaturedCourses from "@/components/FeaturedCourses";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 export default async function Home() {
   return (
     <main className={styles.main}>
@@ -16,7 +17,9 @@ export default async function Home() {
           We focus on real-world scenarios, cutting edge technologies, and
           problem solving.
         </h3>
-        <button>Explore Now</button>
+        <Link href="/courses">
+          <button>Explore Now</button>
+        </Link>
       </div>
       {/* ------ */}
 

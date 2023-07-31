@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "@/styles/hero.module.scss";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -13,7 +14,9 @@ export default function Hero() {
           and Unleash Your Full Potential with Expert Instruction and
           Interactive Content.
         </p>
-        <button>Let&apos;s Start</button>
+        <Link href="/courses">
+          <button>Let&apos;s Start</button>
+        </Link>
       </div>
       <div className={styles.hero__image}>
         <Image src="/hero_image.svg" alt="svg image" width={420} height={420} />

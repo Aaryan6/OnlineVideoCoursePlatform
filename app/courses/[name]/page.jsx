@@ -5,9 +5,13 @@ import styles from "@/styles/coursePage.module.scss";
 import Link from "next/link";
 import { BsArrowLeft } from "react-icons/bs";
 import { usePathname } from "next/navigation";
+import { useGlobalContext } from "@/utils/useContext";
+import { useRouter } from "next/navigation";
 
 export default function CoursePage() {
   const pathName = usePathname().split("/")[2];
+  const { userDetails } = useGlobalContext();
+  const router = useRouter();
 
   const selectedCourse = CoursesDetails.find(
     (course) =>
@@ -18,35 +22,40 @@ export default function CoursePage() {
     return <p>Course not found.</p>;
   }
 
-  return (
-    <div>
-      <Link href={"/courses"}>
-        <div className={styles.back__button}>
-          <BsArrowLeft />
-          <button>Back</button>
+  if (selectedCourse.course_type === "Premium" && userDetails == null) {
+    router.push("/courses");
+    return;
+  } else {
+    return (
+      <div>
+        <Link href={"/courses"}>
+          <div className={styles.back__button}>
+            <BsArrowLeft />
+            <button>Back</button>
+          </div>
+        </Link>
+        <div className={styles.container}>
+          <h1>{selectedCourse.course_name}</h1>
+          <div className={styles.courses}>
+            {selectedCourse.video_links.map((videoLink, index) => {
+              return (
+                <div className={styles.card} key={index}>
+                  <iframe
+                    height={"240"}
+                    src={videoLink}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </Link>
-      <div className={styles.container}>
-        <h1>{selectedCourse.course_name}</h1>
-        <div className={styles.courses}>
-          {selectedCourse.video_links.map((videoLink, index) => {
-            return (
-              <div className={styles.card} key={index}>
-                <iframe
-                  height={"240"}
-                  src={videoLink}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            );
-          })}
-        </div>
-      </div>
 
-      <Footer />
-    </div>
-  );
+        <Footer />
+      </div>
+    );
+  }
 }

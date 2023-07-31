@@ -2,9 +2,11 @@
 import styles from "@/styles/featuredCourses.module.scss";
 import { CoursesDetails } from "@/courseData";
 import Card from "./Card";
+import { useGlobalContext } from "@/utils/useContext";
 
 export default function FeaturedCourses() {
-  let user;
+  const { userDetails } = useGlobalContext();
+  let user = userDetails;
   return (
     <div className={styles.container}>
       <div className={styles.container__wrapper}>

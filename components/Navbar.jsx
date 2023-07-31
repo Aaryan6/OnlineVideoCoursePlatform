@@ -3,8 +3,13 @@ import Link from "next/link";
 import styles from "@/styles/navbar.module.scss";
 import { useGlobalContext } from "@/utils/useContext";
 import { useEffect } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Navbar({ user }) {
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+
   const creatingAvatar = (email) => {
     if (!email) return;
     return email[0].toUpperCase();
@@ -15,6 +20,12 @@ export default function Navbar({ user }) {
   useEffect(() => {
     login(user);
   }, [user]);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    router.refresh();
+  };
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbar__logo}>
@@ -47,7 +58,7 @@ export default function Navbar({ user }) {
               </div>
               <div className={styles.dropdown}>
                 <li>{userDetails?.email}</li>
-                <li>Logout</li>
+                <li onClick={signOut}>Logout</li>
               </div>
             </div>
           ) : (
